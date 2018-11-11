@@ -1,4 +1,7 @@
 {
+  "name": "true/oauth-true-accounts",
+  "description": "TrueAccounts Provider for the PHP League's OAuth 2.0 Client",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "True\\OAuth2\\": "src"
