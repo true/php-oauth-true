@@ -83,6 +83,11 @@ class TrueAccounts extends AbstractProvider
         return ' ';
     }
 
+    protected function getAllowedClientOptions(array $options)
+    {
+        return array_merge(parent::getAllowedClientOptions($options), ['handler']);
+    }
+
     /**
      * Checks a provider response for errors.
      *
