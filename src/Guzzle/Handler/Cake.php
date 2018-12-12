@@ -9,6 +9,25 @@ use Psr\Http\Message\RequestInterface;
 
 class Cake
 {
+    /**
+     * @var array
+     */
+    protected $requestOptions;
+    /**
+     * @var Client
+     */
+    protected $client;
+
+    public function __construct(array $requestOptions = [], Client $client = null)
+    {
+        if (!$client) {
+            $client = new Client();
+        }
+
+        $this->requestOptions = $requestOptions;
+        $this->client = $client;
+    }
+
     public function __invoke(RequestInterface $request, array $options)
     {
         $cakeRequest = new Request(
@@ -18,8 +37,7 @@ class Cake
             $request->getBody()->getContents()
         );
 
-        $cakeClient = new Client();
-        $response = $cakeClient->send($cakeRequest);
+        $response = $this->client->send($cakeRequest, $this->requestOptions);
 
         return new FulfilledPromise($response);
     }
